@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-11-2014 10:38:29 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="ModSec.entidades.OpcModulo" optimistic-lock="version" schema="public" table="opc_modulo">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ModSec.entidades.Modulos" fetch="select" name="modulos">
+      <column name="idmodulo" not-null="true"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="200" name="nombre" not-null="true"/>
+    </property>
+    <property name="codigo" type="string">
+      <column length="10" name="codigo" not-null="true" unique="true"/>
+    </property>
+    <property name="url" type="string">
+      <column length="1000" name="url" not-null="true"/>
+    </property>
+    <property name="tipo" type="char">
+      <column length="1" name="tipo" not-null="true"/>
+    </property>
+    <property name="icono" type="string">
+      <column length="100" name="icono"/>
+    </property>
+    <property name="nivelOpc" type="char">
+      <column length="1" name="nivel_opc" not-null="true"/>
+    </property>
+    <property name="activo" type="char">
+      <column length="1" name="activo" not-null="true"/>
+    </property>
+    <property name="descripcion" type="string">
+      <column length="500" name="descripcion" not-null="true"/>
+    </property>
+    <property name="depjerq" type="int">
+      <column name="depjerq" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="opcRols" table="opc_rol">
+      <key>
+        <column name="idopc_modulo" not-null="true"/>
+      </key>
+      <one-to-many class="ModSec.entidades.OpcRol"/>
+    </set>
+  </class>
+</hibernate-mapping>

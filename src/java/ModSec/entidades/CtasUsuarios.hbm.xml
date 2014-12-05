@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-11-2014 10:38:29 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="ModSec.entidades.CtasUsuarios" optimistic-lock="version" schema="public" table="ctas_usuarios">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ModSec.entidades.CtasUsuarios" fetch="select" name="ctasUsuarios">
+      <column name="idrol" not-null="true"/>
+    </many-to-one>
+    <property name="login" type="string">
+      <column length="12" name="login" not-null="true" unique="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="300" name="password"/>
+    </property>
+    <property name="cambiarpass" type="char">
+      <column length="1" name="cambiarpass" not-null="true"/>
+    </property>
+    <property name="fechacaducta" type="date">
+      <column length="13" name="fechacaducta"/>
+    </property>
+    <property name="fechaultmod" type="date">
+      <column length="13" name="fechaultmod" not-null="true"/>
+    </property>
+    <property name="fechaulting" type="date">
+      <column length="13" name="fechaulting" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="logs" table="log">
+      <key>
+        <column name="idctausuario" not-null="true"/>
+      </key>
+      <one-to-many class="ModSec.entidades.Log"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="ctasUsuarioses" table="ctas_usuarios">
+      <key>
+        <column name="idrol" not-null="true"/>
+      </key>
+      <one-to-many class="ModSec.entidades.CtasUsuarios"/>
+    </set>
+  </class>
+</hibernate-mapping>
